@@ -2,7 +2,7 @@
 
 Backend and infrastructure engineer. UTC+3.
 
-I work on backend systems, automation, distributed applications and infrastructure — I like taking a problem apart, understanding it fully, and building the system from the ground up rather than bolting features onto something that already exists.
+I work on backend systems, automation, distributed applications and infrastructure — I like taking a problem apart, understanding it fully, and building the system from the ground up rather than bolting features onto something that already exists( but can also do that).
 
 Around 3 years of hands-on experience (2 outside of school projects), covering personal, open-source and commercial work. My approach is simple: think through the design before writing code, prefer known patterns over cleverness, and keep iterating on something until it actually holds up.
 
