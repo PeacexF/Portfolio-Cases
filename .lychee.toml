@@ -1,0 +1,23 @@
+# https://lychee.cli.rs/#/usage/config
+
+include_verbatim = false
+
+exclude = [
+    '^mailto:',
+    '^tel:',
+    '<email>',
+    '<telegram>',
+    '<session_id>',
+    '<website>',
+]
+
+exclude_all_private = true
+
+max_retries = 3
+retry_wait_time = 5
+
+timeout = 20
+
+accept = ["100..=103", "200..=299", "300..=399"]
+
+include_fragments = false
