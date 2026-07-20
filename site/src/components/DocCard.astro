@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  oneLiner: string;
+}
+const { href, title, oneLiner } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block rounded-lg border border-hairline bg-surface p-5 transition-colors hover:border-accent"
+>
+  <h3 class="font-display font-semibold text-ink group-hover:text-accent transition-colors">
+    {title}
+  </h3>
+  {oneLiner && <p class="mt-2 text-sm text-muted leading-relaxed">{oneLiner}</p>}
+</a>
