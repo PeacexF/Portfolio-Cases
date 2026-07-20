@@ -1,9 +1,5 @@
 name: Deploy Site to GitHub Pages
 
-# No path filter on purpose: the site reads content directly from
-# about/, services/, osint/, and development/ at build time (see
-# site/src/content.config.ts), so a change to any case study or doc
-# should trigger a rebuild, not just a change inside site/.
 on:
   push:
     branches: ["main"]
@@ -14,8 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-# Only one deployment at a time; a newer push supersedes an in-flight one
-# rather than queuing behind it.
 concurrency:
   group: pages
   cancel-in-progress: true
