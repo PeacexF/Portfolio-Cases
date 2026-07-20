@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string; // e.g. "development/projects/chelicera" — drives the breadcrumb
+}
+
+const {
+  title,
+  description = "Backend and infrastructure engineer. Systems designed from scratch, with real architecture behind them.",
+  path = "",
+} = Astro.props;
+
+const segments = path.split("/").filter(Boolean);
+const crumbs = segments.map((seg, i) => ({
+  label: seg,
+  href: "/" + segments.slice(0, i + 1).join("/"),
+}));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title} — Peace</title>
+    <meta name="description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="border-b border-hairline">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+        <a href="/" class="font-display font-semibold text-lg tracking-tight text-ink shrink-0">
+          Peace
+        </a>
+        <nav class="hidden sm:flex items-center gap-6 font-mono text-sm text-muted">
+          <a href="/about" class="hover:text-ink transition-colors">about</a>
+          <a href="/services" class="hover:text-ink transition-colors">services</a>
+          <a href="/development" class="hover:text-ink transition-colors">development</a>
+          <a href="/osint" class="hover:text-ink transition-colors">osint</a>
+        </nav>
+      </div>
+      {crumbs.length > 0 && (
+        <div class="max-w-5xl mx-auto px-6 pb-3 -mt-1">
+          <p class="font-mono text-xs text-muted overflow-x-auto whitespace-nowrap">
+            <a href="/" class="hover:text-accent transition-colors">~</a>
+            {crumbs.map((c) => (
+              <>
+                <span class="mx-1 text-hairline">/</span>
+                <a href={c.href} class="hover:text-accent transition-colors">{c.label}</a>
+              </>
+            ))}
+          </p>
+        </div>
+      )}
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-hairline mt-24">
+      <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 font-mono text-xs text-muted">
+        <p>~/peace — backend &amp; infrastructure engineer</p>
+        <a href="/about/contact" class="hover:text-accent transition-colors">get in touch →</a>
+      </div>
+    </footer>
+  </body>
+</html>

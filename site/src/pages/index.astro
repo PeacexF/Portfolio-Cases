@@ -1,17 +1,48 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projectMeta } from "../data/projects";
 
+const highlights = ["chelicera", "stinger", "proxyc"] as const;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <section class="max-w-5xl mx-auto px-6 pt-20 pb-16">
+    <p class="font-mono text-sm text-accent mb-4">$ whoami</p>
+    <h1 class="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-ink max-w-2xl leading-[1.1]">
+      Backend &amp; infrastructure engineer.
+    </h1>
+    <p class="mt-6 max-w-xl text-muted leading-relaxed">
+      I work on backend systems, automation, distributed applications and infrastructure —
+      taking a problem apart, understanding it fully, and building the system from the ground
+      up rather than bolting features onto something that already exists.
+    </p>
+    <p class="mt-2 max-w-xl text-muted leading-relaxed">
+      Around 3 years of hands-on experience, covering personal, open-source and commercial work.
+      Simplicity over cleverness, known patterns over reinvention, iterate until it actually holds up.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="/development/projects"
+        class="font-mono text-sm px-4 py-2 rounded-md bg-ink text-paper hover:bg-accent transition-colors"
+      >
+        view projects
+      </a>
+      <a
+        href="/about/contact"
+        class="font-mono text-sm px-4 py-2 rounded-md border border-hairline text-ink hover:border-accent hover:text-accent transition-colors"
+      >
+        get in touch
+      </a>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 pb-24">
+    <p class="font-mono text-xs text-muted mb-4">~/development/projects — a few to start with</p>
+    <div class="grid sm:grid-cols-3 gap-4">
+      {highlights.map((slug) => (
+        <ProjectCard slug={slug} meta={projectMeta[slug]} />
+      ))}
+    </div>
+  </section>
+</Layout>

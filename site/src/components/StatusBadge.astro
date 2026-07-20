@@ -1,0 +1,21 @@
+---
+import type { ProjectStatus } from "../data/projects";
+import { statusLabel } from "../data/projects";
+
+interface Props {
+  status: ProjectStatus;
+}
+const { status } = Astro.props;
+
+const dotColor: Record<ProjectStatus, string> = {
+  active: "bg-status-active",
+  finished: "bg-status-finished",
+  paused: "bg-status-paused",
+  development: "bg-status-development",
+};
+---
+
+<span class="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
+  <span class={`w-1.5 h-1.5 rounded-full ${dotColor[status]}`}></span>
+  {statusLabel[status]}
+</span>

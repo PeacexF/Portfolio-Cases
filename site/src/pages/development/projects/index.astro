@@ -1,0 +1,53 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ProjectCard from "../../../components/ProjectCard.astro";
+import { projectMeta, type ProjectCategory } from "../../../data/projects";
+
+const groups: { key: ProjectCategory; label: string; blurb: string }[] = [
+  {
+    key: "main",
+    label: "Main Projects",
+    blurb: "Personal, self-initiated work — architecture and design decisions are entirely mine.",
+  },
+  {
+    key: "client-work",
+    label: "Client Work",
+    blurb: "Commercial projects, built for paying clients.",
+  },
+  {
+    key: "labs",
+    label: "Labs",
+    blurb: "Small, learning-oriented builds — pet projects rather than production work.",
+  },
+];
+
+const entries = Object.entries(projectMeta);
+---
+
+<Layout title="Projects" path="development/projects">
+  <section class="max-w-5xl mx-auto px-6 pt-16 pb-8">
+    <h1 class="font-display text-3xl font-semibold tracking-tight text-ink">Projects</h1>
+    <p class="mt-3 max-w-xl text-muted leading-relaxed">
+      Case studies of what's actually in the repo — architecture, decisions, and the
+      tradeoffs behind them. Not every project made the cut for a public write-up.
+    </p>
+  </section>
+
+  {groups.map((group) => {
+    const items = entries.filter(([, meta]) => meta.category === group.key);
+    if (items.length === 0) return null;
+    return (
+      <section class="max-w-5xl mx-auto px-6 pb-16">
+        <div class="mb-4">
+          <h2 class="font-display text-lg font-semibold text-ink">{group.label}</h2>
+          <p class="text-sm text-muted">{group.blurb}</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {items.map(([slug, meta]) => (
+            <ProjectCard slug={slug} meta={meta} />
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</Layout>

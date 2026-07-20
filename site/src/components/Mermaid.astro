@@ -1,0 +1,53 @@
+---
+// doesnt work xdd
+---
+
+<div class="mermaid-root">
+  <slot />
+</div>
+
+<script>
+  import mermaid from "mermaid";
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "base",
+    themeVariables: {
+      background: "#f6f7f9",
+      primaryColor: "#e4f0f1",
+      primaryTextColor: "#12161d",
+      primaryBorderColor: "#1e7a85",
+      lineColor: "#5a6472",
+      secondaryColor: "#ffffff",
+      tertiaryColor: "#f6f7f9",
+      fontFamily: "IBM Plex Mono, monospace",
+      fontSize: "14px",
+    },
+  });
+
+  async function renderDiagrams() {
+    const blocks = document.querySelectorAll<HTMLElement>(
+      ".mermaid-root pre > code.language-mermaid",
+    );
+
+    let i = 0;
+    for (const block of blocks) {
+      const source = block.textContent ?? "";
+      const pre = block.parentElement;
+      if (!pre) continue;
+
+      const container = document.createElement("div");
+      container.className = "mermaid-diagram not-prose my-8 overflow-x-auto";
+
+      try {
+        const { svg } = await mermaid.render(`mermaid-${i++}`, source);
+        container.innerHTML = svg;
+        pre.replaceWith(container);
+      } catch (err) {
+        console.error("Mermaid render failed:", err);
+      }
+    }
+  }
+
+  renderDiagrams();
+</script>
