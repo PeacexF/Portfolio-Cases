@@ -1,5 +1,3 @@
-# https://lychee.cli.rs/#/usage/config
-
 include_verbatim = false
 
 exclude = [
